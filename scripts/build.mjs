@@ -15,7 +15,7 @@ const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 const site = {
   name: "연봉 실수령액표",
-  origin: "https://example.com",
+  origin: "https://www.mysalary.kr",
   adsenseClient: "ca-pub-0000000000000000"
 };
 
