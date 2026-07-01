@@ -263,8 +263,8 @@ function pageLayout({
   <header class="site-header">
     <a class="brand" href="/">연봉 실수령액표</a>
     <nav aria-label="주요 메뉴">
-      <a href="/salary/2026">전체표</a>
-      <a href="/calculator">계산기</a>
+      <a href="/salary/2026">전체 연봉표</a>
+      <a href="/calculator">조건별 계산</a>
       <a href="/guide/2026">계산 기준</a>
       <a href="/contact">문의</a>
     </nav>
@@ -277,7 +277,7 @@ function pageLayout({
         <p class="intro">${intro}</p>
       </div>
       <div class="quick-calc" id="quick-calculator">
-        <label for="quickSalary">세전 연봉</label>
+        <label for="quickSalary">연봉표 빠른 확인</label>
         <div class="input-row">
           <input id="quickSalary" type="number" min="2000" max="100000" step="100" value="3000" inputmode="numeric">
           <span>만 원</span>
@@ -439,8 +439,8 @@ function relatedLinks(currentStart) {
       label: salaryRangeLabel(currentStart + 1000, currentStart + 2000)
     });
   }
-  links.push({ href: "/salary/2026", label: "2026년 전체 연봉표" });
-  links.push({ href: "/calculator", label: "세전 세후 계산기" });
+  links.push({ href: "/salary/2026", label: "2026년 전체 연봉 실수령액표" });
+  links.push({ href: "/calculator", label: "조건별 실수령액 확인" });
   links.push({ href: "/guide/gross-net-salary", label: "세전 세후 차이" });
   links.push({ href: "/guide/salary-negotiation-net-pay", label: "연봉 협상 실수령액" });
 
@@ -580,7 +580,7 @@ function articlePage(article) {
         <a href="/salary/2026/3000">연봉 3,000만 원 실수령액</a>
         <a href="/salary/2026/5000">연봉 5,000만 원 실수령액</a>
         <a href="/salary/2026/10000">연봉 1억 원 실수령액</a>
-        <a href="/calculator">세전 세후 계산기</a>
+        <a href="/calculator">조건별 실수령액 확인</a>
       </div>
     </section>
     ${sourceSection()}
@@ -590,7 +590,7 @@ function articlePage(article) {
   return pageLayout({
     route: article.route,
     title: `${article.title}｜2026 연봉 실수령액표`,
-    description: `${article.intro} 2026년 기준 세금, 4대보험, 월급 실수령액 계산 기준을 함께 확인하세요.`,
+    description: `${article.intro} 2026년 연봉 실수령액표 기준으로 세금, 4대보험, 월급 공제 내역을 함께 확인하세요.`,
     h1: article.h1,
     intro: article.intro,
     body
@@ -626,7 +626,7 @@ function homePage() {
     ])}
     <section class="content-band">
       <h2>2026년 연봉 실수령액 전체표</h2>
-      <p>세전 연봉 2,000만 원부터 10억 원까지 100만 원 단위로 월 세전 급여, 4대보험, 근로소득세, 지방소득세, 월 실수령액을 정리했습니다.</p>
+      <p>이 사이트의 핵심 콘텐츠는 2026년 연봉 실수령액표입니다. 세전 연봉 2,000만 원부터 10억 원까지 100만 원 단위로 월 세전 급여, 4대보험, 근로소득세, 지방소득세, 월 실수령액을 한 표에서 비교할 수 있게 정리했습니다.</p>
       ${table(rows)}
     </section>
     ${deductionMeaningSection()}
@@ -674,23 +674,19 @@ function homePage() {
 
   return pageLayout({
     route: "/",
-    title: "2026년 연봉 실수령액표｜세전 세후 월급·세금·4대보험 계산",
+    title: "2026 연봉 실수령액표｜연봉별 세후 월급·세금·4대보험 공제표",
     description:
-      "2026년 기준 세전 연봉 2,000만 원부터 10억 원까지 100만 원 단위 실수령액, 국민연금, 건강보험, 장기요양보험, 고용보험, 근로소득세를 확인하세요.",
+      "2026년 연봉 실수령액표입니다. 세전 연봉 2,000만 원부터 10억 원까지 연봉별 세후 월급, 국민연금, 건강보험, 고용보험, 근로소득세 공제액을 표로 확인하세요.",
     h1: "2026년 연봉 실수령액표",
     intro:
-      "세전 연봉을 월급으로 나누고 4대보험, 근로소득세, 지방소득세를 반영해 월 실수령액을 표와 계산기로 확인합니다.",
+      "연봉별 세후 월급과 국민연금, 건강보험, 고용보험, 근로소득세 공제액을 표로 먼저 확인할 수 있습니다.",
     body,
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: site.name,
       url: site.origin,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: `${site.origin}/salary/2026?query={search_term_string}`,
-        "query-input": "required name=search_term_string"
-      }
+      description: "2026년 연봉별 실수령액, 세금, 4대보험 공제액을 표로 정리한 사이트"
     }
   });
 }
@@ -712,9 +708,9 @@ function salaryIndexPage() {
     route: "/salary/2026",
     title: "2026년 연봉 실수령액 전체표｜2,000만 원부터 10억 원까지",
     description:
-      "2026년 기준 연봉 실수령액 전체표입니다. 세전 연봉별 월급, 국민연금, 건강보험, 장기요양, 고용보험, 근로소득세, 지방소득세를 한 번에 확인하세요.",
+      "2026년 연봉 실수령액 전체표입니다. 세전 연봉별 세후 월급, 국민연금, 건강보험, 장기요양, 고용보험, 근로소득세, 지방소득세 공제액을 한 표에서 확인하세요.",
     h1: "2026년 연봉 실수령액 전체표",
-    intro: "2,000만 원부터 10억 원까지 100만 원 단위로 정리한 전체 데이터입니다.",
+    intro: "2,000만 원부터 10억 원까지 100만 원 단위로 정리한 연봉별 세후 월급 공제표입니다.",
     body
   });
 }
@@ -771,10 +767,10 @@ function intervalPage(start) {
 
   return pageLayout({
     route: `/salary/2026/${start}-${end}`,
-    title: `2026년 연봉 ${salaryRangeLabel(start, end)} 실수령액표`,
-    description: `2026년 기준 연봉 ${salaryLabelFromManwon(start)}부터 ${salaryLabelFromManwon(end)}까지 월 실수령액, 4대보험, 근로소득세, 지방소득세를 100만 원 단위로 확인하세요.`,
-    h1: `2026년 연봉 ${salaryRangeLabel(start, end)} 실수령액`,
-    intro: "구간별로 월급과 공제액이 어떻게 바뀌는지 빠르게 비교할 수 있습니다.",
+    title: `2026 연봉 ${salaryRangeLabel(start, end)} 실수령액표｜세후 월급 공제표`,
+    description: `2026년 연봉 ${salaryLabelFromManwon(start)}부터 ${salaryLabelFromManwon(end)}까지 세후 월급, 4대보험, 근로소득세, 지방소득세 공제액을 100만 원 단위 표로 확인하세요.`,
+    h1: `2026년 연봉 ${salaryRangeLabel(start, end)} 실수령액표`,
+    intro: "구간별 연봉표로 월급과 공제액이 어떻게 바뀌는지 빠르게 비교할 수 있습니다.",
     body,
     jsonLd: {
       "@context": "https://schema.org",
@@ -863,10 +859,10 @@ function detailPage(manwon) {
 
   return pageLayout({
     route,
-    title: `2026 연봉 ${salaryLabelFromManwon(manwon)} 실수령액｜세금·4대보험·월급 공제 내역`,
+    title: `2026 연봉 ${salaryLabelFromManwon(manwon)} 실수령액표｜세후 월급·세금 공제표`,
     description: `2026년 기준 연봉 ${salaryLabelFromManwon(manwon)}의 월 실수령액은 ${formatKRW(result.netMonthly)}입니다. 월 세전급여 ${formatKRW(result.grossMonthly)}에서 국민연금, 건강보험, 고용보험, 근로소득세, 지방소득세 공제 내역을 확인하세요.`,
-    h1: `2026년 연봉 ${salaryLabelFromManwon(manwon)} 실수령액`,
-    intro: "세전 월급에서 4대보험과 예상 세금을 차감한 월 실수령액을 항목별로 정리했습니다.",
+    h1: `2026년 연봉 ${salaryLabelFromManwon(manwon)} 실수령액표`,
+    intro: "세전 월급에서 4대보험과 예상 세금을 차감한 세후 월급 공제표입니다.",
     body,
     jsonLd: {
       "@context": "https://schema.org",
@@ -888,7 +884,8 @@ function detailPage(manwon) {
 function calculatorPage() {
   const body = `
     <section class="content-band calculator-panel">
-      <h2>세전 세후 계산기</h2>
+      <h2>조건별 실수령액 확인</h2>
+      <p>기본 연봉 실수령액표에서 비과세 금액이나 원천징수 비율만 바꿔 보고 싶을 때 쓰는 보조 기능입니다. 먼저 전체 연봉표로 기준 금액을 확인한 뒤 조건을 조정해 비교하세요.</p>
       <div class="form-grid">
         <label>세전 연봉
           <input id="annualSalaryInput" type="number" min="0" step="100" value="5000" inputmode="numeric">
@@ -917,18 +914,18 @@ function calculatorPage() {
       },
       {
         q: "퇴직금은 포함되어 있나요?",
-        a: "아닙니다. 이 계산기는 일반 월 급여의 실수령액을 보기 위한 도구이며 퇴직금은 별도로 봐야 합니다."
+        a: "아닙니다. 이 보조 도구는 일반 월 급여의 실수령액을 보기 위한 기능이며 퇴직금은 별도로 봐야 합니다."
       }
     ])}
   `;
 
   return pageLayout({
     route: "/calculator",
-    title: "세전 세후 계산기｜2026년 연봉·월급 실수령액 계산",
+    title: "조건별 연봉 실수령액 확인｜2026 연봉표 보조 계산",
     description:
-      "세전 연봉, 월 비과세 금액, 원천징수 비율을 입력해 2026년 기준 월 실수령액과 4대보험, 근로소득세, 지방소득세를 계산하세요.",
-    h1: "세전 세후 계산기",
-    intro: "연봉과 비과세 금액을 직접 입력해 월 실수령액을 계산합니다.",
+      "2026년 연봉 실수령액표를 기준으로 세전 연봉, 월 비과세 금액, 원천징수 비율을 바꿔 월 실수령액과 4대보험, 근로소득세 공제액을 확인하세요.",
+    h1: "조건별 연봉 실수령액 확인",
+    intro: "전체 연봉표를 보완해 비과세 금액과 원천징수 비율을 직접 바꿔 보는 보조 도구입니다.",
     body
   });
 }
@@ -962,11 +959,11 @@ function guidePage() {
 
   return pageLayout({
     route: "/guide/2026",
-    title: "2026년 연봉 실수령액 계산 기준｜세금·4대보험·검색 등록 안내",
+    title: "2026년 연봉 실수령액표 기준｜세금·4대보험 공제 기준",
     description:
-      "2026년 연봉 실수령액표의 계산 기준, 4대보험 요율, 근로소득세 추정 방식, Google 검색 등록과 AdSense 준비 항목을 정리했습니다.",
-    h1: "2026년 계산 기준",
-    intro: "표와 계산기가 어떤 전제에서 만들어졌는지 투명하게 정리했습니다.",
+      "2026년 연봉 실수령액표의 산출 기준, 4대보험 요율, 근로소득세 추정 방식, 항목별 공제 기준을 정리했습니다.",
+    h1: "2026년 연봉표 기준",
+    intro: "연봉 실수령액표가 어떤 전제에서 만들어졌는지 투명하게 정리했습니다.",
     body
   });
 }
@@ -991,7 +988,7 @@ function privacyPage() {
     <section class="content-band">
       <h2>이용 목적과 보관</h2>
       <ul class="plain-list">
-        <li>서비스 제공: 연봉 실수령액표와 계산기 페이지 제공</li>
+        <li>서비스 제공: 연봉 실수령액표와 조건별 확인 페이지 제공</li>
         <li>운영 관리: 장애 확인, 보안 점검, 악성 요청 차단, 트래픽 분석</li>
         <li>문의 응대: 사용자가 보낸 문의에 대한 답변 및 처리 이력 관리</li>
         <li>광고 운영: Google AdSense 등 광고 게재 및 부정 클릭 방지</li>
@@ -1056,7 +1053,7 @@ function earnedIncomeDeduction(grossAnnual){let deduction;if(grossAnnual<=500000
 function progressiveIncomeTax(taxBase){if(taxBase<=14000000)return taxBase*.06;if(taxBase<=50000000)return taxBase*.15-1260000;if(taxBase<=88000000)return taxBase*.24-5760000;if(taxBase<=150000000)return taxBase*.35-15460000;if(taxBase<=300000000)return taxBase*.38-19960000;if(taxBase<=500000000)return taxBase*.4-25960000;if(taxBase<=1000000000)return taxBase*.42-35960000;return taxBase*.45-65960000}
 function employmentTaxCredit(calculatedTax,grossAnnual){const rawCredit=calculatedTax<=1300000?calculatedTax*.55:715000+(calculatedTax-1300000)*.3;let limit;if(grossAnnual<=33000000){limit=740000}else if(grossAnnual<=70000000){limit=Math.max(660000,740000-(grossAnnual-33000000)*.008)}else{const floor=grossAnnual<=120000000?500000:200000;limit=Math.max(floor,660000-(grossAnnual-70000000)*.5)}return Math.min(rawCredit,limit)}
 function calculateSalary(grossAnnual,options={}){const nonTaxableMonthly=options.nonTaxableMonthly||0;const withholdingRate=options.withholdingRate||1;const grossMonthly=grossAnnual/12;const taxableMonthly=Math.max(0,grossMonthly-nonTaxableMonthly);const pensionBase=Math.min(RULES.nationalPension.baseMaxMonthly,Math.max(RULES.nationalPension.baseMinMonthly,Math.floor(taxableMonthly/1000)*1000));const nationalPension=roundDown10(pensionBase*RULES.nationalPension.employeeRate);const healthInsurance=roundDown10(taxableMonthly*RULES.healthInsurance.employeeRate);const longTermCare=roundDown10(healthInsurance*RULES.longTermCare.rateOnHealthInsurance);const employmentInsurance=roundDown10(taxableMonthly*RULES.employmentInsurance.employeeRate);const annualTaxablePay=Math.max(0,grossAnnual-nonTaxableMonthly*12);const employmentIncome=Math.max(0,annualTaxablePay-earnedIncomeDeduction(annualTaxablePay));const annualSocialInsurance=(nationalPension+healthInsurance+longTermCare+employmentInsurance)*12;const taxBase=Math.max(0,employmentIncome-RULES.personalDeduction-annualSocialInsurance);const calculatedTax=Math.max(0,progressiveIncomeTax(taxBase));const taxCredit=employmentTaxCredit(calculatedTax,annualTaxablePay);const annualIncomeTax=Math.max(0,calculatedTax-taxCredit);const incomeTax=roundDown10(annualIncomeTax/12*withholdingRate);const localIncomeTax=roundDown10(incomeTax*.1);const deductions={nationalPension,healthInsurance,longTermCare,employmentInsurance,incomeTax,localIncomeTax};const totalDeductionMonthly=nationalPension+healthInsurance+longTermCare+employmentInsurance+incomeTax+localIncomeTax;const netMonthly=Math.round(grossMonthly-totalDeductionMonthly);return{grossMonthly:Math.round(grossMonthly),deductions,nationalPension,healthInsurance,longTermCare,employmentInsurance,incomeTax,localIncomeTax,totalDeductionMonthly,netMonthly,netAnnual:netMonthly*12,netRate:grossMonthly>0?netMonthly/grossMonthly:0}}
-function renderQuick(){const input=document.querySelector("#quickSalary");const output=document.querySelector("#quickResult");if(!input||!output)return;const update=()=>{const manwon=Number(input.value||0);const r=calculateSalary(manwon*10000);output.textContent="월 실수령액 "+formatKRW(r.netMonthly)};input.addEventListener("input",update);update()}
+function renderQuick(){const input=document.querySelector("#quickSalary");const output=document.querySelector("#quickResult");if(!input||!output)return;const update=()=>{const manwon=Number(input.value||0);const r=calculateSalary(manwon*10000);output.textContent="표 기준 월 실수령액 "+formatKRW(r.netMonthly)};input.addEventListener("input",update);update()}
 function renderCalculator(){const salary=document.querySelector("#annualSalaryInput");const nonTax=document.querySelector("#nonTaxableInput");const withholding=document.querySelector("#withholdingInput");const output=document.querySelector("#calculatorOutput");if(!salary||!nonTax||!withholding||!output)return;const update=()=>{const r=calculateSalary(Number(salary.value||0)*10000,{nonTaxableMonthly:Number(nonTax.value||0)*10000,withholdingRate:Number(withholding.value||1)});output.innerHTML=\`<div><span>월 실수령액</span><strong>\${formatKRW(r.netMonthly)}</strong></div><div><span>월 공제 합계</span><strong class="negative">\${minusKRW(r.totalDeductionMonthly)}</strong></div><div><span>실수령률</span><strong>\${formatPercent(r.netRate)}</strong></div><div><span>연 실수령액</span><strong>\${formatKRW(r.netAnnual)}</strong></div><table><tbody><tr><th>월 세전급여</th><td>\${formatKRW(r.grossMonthly)}</td></tr><tr><th>국민연금</th><td class="negative">\${minusKRW(r.nationalPension)}</td></tr><tr><th>건강보험</th><td class="negative">\${minusKRW(r.healthInsurance)}</td></tr><tr><th>장기요양</th><td class="negative">\${minusKRW(r.longTermCare)}</td></tr><tr><th>고용보험</th><td class="negative">\${minusKRW(r.employmentInsurance)}</td></tr><tr><th>근로소득세</th><td class="negative">\${minusKRW(r.incomeTax)}</td></tr><tr><th>지방소득세</th><td class="negative">\${minusKRW(r.localIncomeTax)}</td></tr></tbody></table>\`};[salary,nonTax,withholding].forEach((el)=>el.addEventListener("input",update));withholding.addEventListener("change",update);update()}
 renderQuick();renderCalculator();`;
 }
