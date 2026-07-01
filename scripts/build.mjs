@@ -28,6 +28,116 @@ const popularSalaries = [
 const popularSalarySet = new Set(popularSalaries);
 const intervalStarts = [];
 for (let start = 2000; start < 100000; start += 1000) intervalStarts.push(start);
+const articlePages = [
+  {
+    route: "/guide/gross-net-salary",
+    title: "세전 세후 차이｜월급 실수령액이 줄어드는 이유",
+    h1: "세전 세후 차이",
+    intro: "세전 연봉과 실제 통장에 들어오는 월급이 왜 다른지 공제 항목 중심으로 정리했습니다.",
+    sections: [
+      [
+        "세전 연봉과 월 실수령액",
+        "세전 연봉은 회사가 급여 조건으로 제시하는 총액입니다. 하지만 매월 지급할 때는 국민연금, 건강보험, 장기요양보험, 고용보험, 근로소득세, 지방소득세가 먼저 빠지고 남은 금액이 통장에 들어옵니다.",
+        "그래서 연봉이 100만 원 올라도 월 실수령액은 단순히 83,333원 늘지 않습니다. 소득이 늘어난 만큼 4대보험과 세금도 함께 변하기 때문입니다."
+      ],
+      [
+        "비교할 때 봐야 하는 숫자",
+        "연봉 협상이나 이직 제안을 비교할 때는 세전 연봉뿐 아니라 월 실수령액, 총 공제액, 연 실수령액을 같이 봐야 합니다. 특히 같은 연봉이라도 비과세 식대, 상여 지급 방식, 원천징수 비율에 따라 실제 월급이 달라질 수 있습니다.",
+        "이 사이트의 표는 본인 1명, 비과세 0원, 12개월 균등 지급 기준으로 조건을 고정해 연봉별 차이를 비교하기 쉽게 만든 참고용 자료입니다."
+      ]
+    ]
+  },
+  {
+    route: "/guide/four-insurance-deductions",
+    title: "4대보험 공제 항목｜국민연금·건강보험·고용보험 계산 기준",
+    h1: "4대보험 공제 항목",
+    intro: "월급에서 매달 빠지는 국민연금, 건강보험, 장기요양보험, 고용보험의 의미를 정리했습니다.",
+    sections: [
+      [
+        "월급에서 빠지는 4대보험",
+        "근로자의 월급명세서에는 국민연금, 건강보험, 장기요양보험, 고용보험이 공제 항목으로 표시됩니다. 산재보험은 일반적으로 사업주가 부담하므로 근로자 실수령액 계산에서는 차감하지 않습니다.",
+        "국민연금은 기준소득월액 상한과 하한이 있어 고연봉 구간에서는 공제액이 계속 비례해서 늘지 않습니다. 반면 건강보험과 고용보험은 과세 보수에 따라 변동하는 성격이 큽니다."
+      ],
+      [
+        "공제액을 볼 때 주의할 점",
+        "회사별 비과세 항목, 입사일, 휴직, 상여 지급 방식에 따라 실제 보험료는 달라질 수 있습니다. 연봉 실수령액표는 여러 연봉을 같은 기준으로 비교하기 위한 표준 추정치로 보는 것이 좋습니다.",
+        "정확한 급여명세서 검증이 필요하다면 국민건강보험공단, 국민연금공단, 고용보험 안내와 회사 급여 담당자의 계산 기준을 함께 확인해야 합니다."
+      ]
+    ]
+  },
+  {
+    route: "/guide/income-tax-withholding",
+    title: "근로소득세 원천징수｜간이세액표와 연봉 실수령액",
+    h1: "근로소득세 원천징수",
+    intro: "연봉 실수령액에서 근로소득세가 어떻게 반영되는지 간이세액표 관점으로 설명합니다.",
+    sections: [
+      [
+        "근로소득세는 단순 세율 곱셈이 아닙니다",
+        "월급에서 빠지는 근로소득세는 세전 월급에 단순 세율을 곱해서 정해지는 구조가 아닙니다. 급여 수준, 공제대상 가족 수, 자녀 수, 원천징수 선택 비율 등 여러 조건을 바탕으로 매월 원천징수액이 정해집니다.",
+        "이 사이트는 비교를 위해 본인 1명, 비과세 0원, 원천징수 100% 기준으로 예상 근로소득세를 계산합니다. 실제 연말정산 결과와는 차이가 날 수 있습니다."
+      ],
+      [
+        "원천징수와 연말정산",
+        "매월 납부하는 근로소득세는 최종 세금이 아니라 미리 납부하는 성격입니다. 연말정산에서 신용카드, 의료비, 교육비, 보험료, 부양가족 등 개인별 공제가 반영되면 환급 또는 추가 납부가 발생할 수 있습니다.",
+        "따라서 연봉 실수령액표는 월급 흐름을 비교하는 도구로 활용하고, 최종 세금 판단은 국세청 자료와 개인별 공제 내역을 기준으로 확인해야 합니다."
+      ]
+    ]
+  },
+  {
+    route: "/guide/national-pension-cap",
+    title: "국민연금 상한액｜고연봉 실수령액에 미치는 영향",
+    h1: "국민연금 상한액",
+    intro: "고연봉 구간에서 국민연금 공제액이 일정 수준에서 멈추는 이유를 설명합니다.",
+    sections: [
+      [
+        "국민연금은 기준소득월액으로 계산합니다",
+        "국민연금은 월급 전체를 그대로 기준으로 삼지 않고 기준소득월액을 적용합니다. 기준소득월액에는 하한과 상한이 있기 때문에 일정 연봉 이상에서는 국민연금 공제액이 더 이상 같은 비율로 늘지 않습니다.",
+        "이 특성 때문에 고연봉 구간에서는 건강보험, 고용보험, 근로소득세가 실수령액 변화에 더 크게 보일 수 있습니다."
+      ],
+      [
+        "실수령액표에서 보는 방법",
+        "연봉이 올라갈 때 국민연금 항목이 어느 시점부터 거의 고정되는지 보면 상한 적용 효과를 확인할 수 있습니다. 반대로 소득세는 과세표준이 높아질수록 증가 폭이 커질 수 있습니다.",
+        "연봉 협상이나 이직 제안을 볼 때는 총 공제액뿐 아니라 항목별 공제 구조를 같이 보는 것이 좋습니다."
+      ]
+    ]
+  },
+  {
+    route: "/guide/salary-negotiation-net-pay",
+    title: "연봉 협상 실수령액｜세전 인상액과 세후 월급 차이",
+    h1: "연봉 협상 실수령액",
+    intro: "연봉이 올랐을 때 실제 월급이 얼마나 늘어나는지 확인하는 방법을 정리했습니다.",
+    sections: [
+      [
+        "세전 인상액과 세후 인상액은 다릅니다",
+        "연봉이 300만 원 오른다고 해서 매월 25만 원이 그대로 늘어나는 것은 아닙니다. 인상분에도 4대보험과 근로소득세가 적용되므로 실제 월 실수령 증가액은 그보다 작습니다.",
+        "그래서 연봉 협상에서는 세전 연봉, 월 세전 급여, 월 공제액, 월 실수령액을 함께 비교해야 합니다."
+      ],
+      [
+        "이직 제안 비교 방법",
+        "이직 제안을 받았다면 현재 연봉과 제안 연봉의 월 실수령액 차이를 먼저 확인하세요. 여기에 식대 비과세, 성과급 지급 방식, 복지포인트, 교통비, 퇴직금 포함 여부를 함께 봐야 실제 조건을 더 정확하게 비교할 수 있습니다.",
+        "연봉 실수령액표의 이전 구간 대비 증가액과 주변 연봉 비교표를 함께 보면 세전 인상액이 세후 월급에 어떻게 반영되는지 빠르게 볼 수 있습니다."
+      ]
+    ]
+  },
+  {
+    route: "/guide/salary-100m-net-pay",
+    title: "연봉 1억 실수령액｜세금과 4대보험 구조",
+    h1: "연봉 1억 실수령액",
+    intro: "연봉 1억 원 구간에서 월 실수령액이 어떻게 결정되는지 공제 구조 중심으로 설명합니다.",
+    sections: [
+      [
+        "연봉 1억 원의 체감 월급",
+        "연봉 1억 원은 세전으로는 월 833만 원 수준이지만, 실제 월 실수령액은 4대보험과 근로소득세, 지방소득세를 제외한 금액입니다. 특히 이 구간에서는 소득세 부담이 체감 실수령액에 크게 작용합니다.",
+        "국민연금은 상한 적용으로 일정 수준에서 멈추지만, 건강보험과 고용보험, 근로소득세는 소득 수준에 따라 계속 영향을 줍니다."
+      ],
+      [
+        "1억 전후 연봉을 비교할 때",
+        "연봉 9,000만 원, 1억 원, 1억 2,000만 원을 비교할 때는 월 실수령액 차이와 총 공제액 차이를 같이 보는 것이 좋습니다. 세전 금액 차이가 커 보여도 세후 월급 차이는 생각보다 작게 느껴질 수 있습니다.",
+        "상세 페이지의 공제 비중 그래프와 주변 연봉 비교표를 보면 어느 항목이 실수령액 차이를 만드는지 확인할 수 있습니다."
+      ]
+    ]
+  }
+];
 
 function routePath(route) {
   if (route === "/") return path.join(dist, "index.html");
@@ -50,6 +160,16 @@ function escapeHtml(value) {
 
 function canonical(route) {
   return `${site.origin}${route === "/" ? "" : route}`;
+}
+
+function hasLiveAdsenseClient() {
+  return site.adsenseClient && !site.adsenseClient.includes("000000");
+}
+
+function adSlot(className = "ad-slot") {
+  return hasLiveAdsenseClient()
+    ? ""
+    : `<div class="${className}" aria-label="광고 영역">AdSense 광고 영역</div>`;
 }
 
 function salaryHref(manwon) {
@@ -114,7 +234,7 @@ function pageLayout({
   noIndex = false
 }) {
   const adScript =
-    site.adsenseClient && !site.adsenseClient.includes("000000")
+    hasLiveAdsenseClient()
       ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsenseClient}" crossorigin="anonymous"></script>`
       : "";
   const robots = noIndex ? "noindex,follow" : "index,follow";
@@ -165,7 +285,7 @@ function pageLayout({
         <output id="quickResult">계산 중</output>
       </div>
     </section>
-    <div class="ad-slot" aria-label="광고 영역">AdSense 광고 영역</div>
+    ${adSlot()}
     ${body}
   </main>
   <footer>
@@ -230,7 +350,7 @@ function table(rowsToRender, { compact = false, grouped = !compact } = {}) {
 
     return groups
       .map((group, index) => {
-        const ad = index === 0 ? "" : `<div class="table-ad-slot">AdSense 광고 영역</div>`;
+        const ad = index > 0 && index % 4 === 0 ? adSlot("table-ad-slot") : "";
         return `${ad}${tableBlock(group.rows.map(rowHtml).join(""))}`;
       })
       .join("");
@@ -321,6 +441,8 @@ function relatedLinks(currentStart) {
   }
   links.push({ href: "/salary/2026", label: "2026년 전체 연봉표" });
   links.push({ href: "/calculator", label: "세전 세후 계산기" });
+  links.push({ href: "/guide/gross-net-salary", label: "세전 세후 차이" });
+  links.push({ href: "/guide/salary-negotiation-net-pay", label: "연봉 협상 실수령액" });
 
   return `<section class="content-band">
     <h2>관련 페이지</h2>
@@ -429,6 +551,52 @@ function increaseChart(centerManwon) {
   </section>`;
 }
 
+function salarySeoSection(manwon, result, row) {
+  const deductions = rowDeductions(result);
+  const previousIncrease = row?.monthlyNetIncreaseFromPrevious;
+  const localTaxText = deductions.localIncomeTax > 0 ? minusKRW(deductions.localIncomeTax) : "0원";
+
+  return `<section class="content-band seo-copy">
+    <h2>연봉 ${salaryLabelFromManwon(manwon)} 세금과 실수령액 해석</h2>
+    <p>2026년 기준 연봉 ${salaryLabelFromManwon(manwon)}의 월 세전 급여는 ${formatKRW(result.grossMonthly)}입니다. 공제 항목은 국민연금 ${minusKRW(deductions.nationalPension)}, 건강보험 ${minusKRW(deductions.healthInsurance)}, 장기요양보험 ${minusKRW(deductions.longTermCare)}, 고용보험 ${minusKRW(deductions.employmentInsurance)}, 근로소득세 ${minusKRW(deductions.incomeTax)}, 지방소득세 ${localTaxText}입니다.</p>
+    <p>총 공제액은 매월 ${minusKRW(result.totalDeductionMonthly)}이며, 이를 제외한 월 실수령액은 ${formatKRW(result.netMonthly)}입니다. 연봉 ${salaryLabelFromManwon(manwon)} 실수령액을 볼 때는 세전 월급만 보지 말고 4대보험과 소득세가 각각 얼마씩 빠지는지 함께 확인하는 것이 좋습니다.</p>
+    <p>${previousIncrease ? `직전 100만 원 구간과 비교하면 월 실수령액은 ${formatIncrease(previousIncrease)} 변합니다. ` : ""}연봉 협상이나 이직 제안을 비교할 때는 세전 인상액보다 세후 월급 증가액이 체감에 더 가깝습니다.</p>
+  </section>`;
+}
+
+function articlePage(article) {
+  const body = `
+    ${article.sections
+      .map(
+        ([heading, ...paragraphs]) => `<section class="content-band">
+          <h2>${heading}</h2>
+          ${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+        </section>`
+      )
+      .join("")}
+    <section class="content-band">
+      <h2>함께 보면 좋은 표</h2>
+      <div class="link-grid">
+        <a href="/salary/2026/3000">연봉 3,000만 원 실수령액</a>
+        <a href="/salary/2026/5000">연봉 5,000만 원 실수령액</a>
+        <a href="/salary/2026/10000">연봉 1억 원 실수령액</a>
+        <a href="/calculator">세전 세후 계산기</a>
+      </div>
+    </section>
+    ${sourceSection()}
+    ${disclaimerSection()}
+  `;
+
+  return pageLayout({
+    route: article.route,
+    title: `${article.title}｜2026 연봉 실수령액표`,
+    description: `${article.intro} 2026년 기준 세금, 4대보험, 월급 실수령액 계산 기준을 함께 확인하세요.`,
+    h1: article.h1,
+    intro: article.intro,
+    body
+  });
+}
+
 function homePage() {
   const row3000 = rows.find((row) => row.manwon === 3000);
   const row5000 = rows.find((row) => row.manwon === 5000);
@@ -478,6 +646,12 @@ function homePage() {
           (salary) =>
             `<a href="/salary/2026/${salary}">연봉 ${salaryLabelFromManwon(salary)} 실수령액</a>`
         )
+        .join("")}</div>
+    </section>
+    <section class="content-band">
+      <h2>실수령액 해설</h2>
+      <div class="link-grid">${articlePages
+        .map((article) => `<a href="${article.route}">${article.h1}</a>`)
         .join("")}</div>
     </section>
     ${sourceSection()}
@@ -647,6 +821,7 @@ function detailPage(manwon) {
       }
     ])}
     ${paycheckBreakdown(result)}
+    ${salarySeoSection(manwon, result, row)}
     ${monthlyDecomposition(result)}
     ${deductionShareChart(result)}
     ${increaseChart(manwon)}
@@ -688,8 +863,8 @@ function detailPage(manwon) {
 
   return pageLayout({
     route,
-    title: `2026년 연봉 ${salaryLabelFromManwon(manwon)} 실수령액｜월급·세금·4대보험 공제표`,
-    description: `2026년 기준 연봉 ${salaryLabelFromManwon(manwon)}의 월 실수령액, 국민연금, 건강보험, 장기요양보험, 고용보험, 근로소득세, 지방소득세를 확인하세요.`,
+    title: `2026 연봉 ${salaryLabelFromManwon(manwon)} 실수령액｜세금·4대보험·월급 공제 내역`,
+    description: `2026년 기준 연봉 ${salaryLabelFromManwon(manwon)}의 월 실수령액은 ${formatKRW(result.netMonthly)}입니다. 월 세전급여 ${formatKRW(result.grossMonthly)}에서 국민연금, 건강보험, 고용보험, 근로소득세, 지방소득세 공제 내역을 확인하세요.`,
     h1: `2026년 연봉 ${salaryLabelFromManwon(manwon)} 실수령액`,
     intro: "세전 월급에서 4대보험과 예상 세금을 차감한 월 실수령액을 항목별로 정리했습니다.",
     body,
@@ -775,6 +950,12 @@ function guidePage() {
         <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" rel="noopener noreferrer">canonical URL 안내</a>
         <a href="https://support.google.com/adsense/answer/9724" rel="noopener noreferrer">AdSense 자격 요건</a>
       </div>
+    </section>
+    <section class="content-band">
+      <h2>실수령액 해설 모음</h2>
+      <div class="link-grid">${articlePages
+        .map((article) => `<a href="${article.route}">${article.h1}</a>`)
+        .join("")}</div>
     </section>
     ${relatedLinks()}
   `;
@@ -896,6 +1077,9 @@ async function main() {
   await writePage("/guide/2026", guidePage());
   await writePage("/privacy", privacyPage());
   await writePage("/contact", contactPage());
+  for (const article of articlePages) {
+    await writePage(article.route, articlePage(article));
+  }
 
   for (const start of intervalStarts) {
     await writePage(`/salary/2026/${start}-${start + 1000}`, intervalPage(start));
@@ -911,6 +1095,7 @@ async function main() {
     "/guide/2026",
     "/privacy",
     "/contact",
+    ...articlePages.map((article) => article.route),
     ...intervalStarts.map((start) => `/salary/2026/${start}-${start + 1000}`),
     ...popularSalaries.map((salary) => `/salary/2026/${salary}`)
   ];
