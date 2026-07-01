@@ -4,6 +4,11 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/salary/:amount((?!2026$)\\d{4,6})/",
+      "destination": "/salary/2026/:amount",
+      "permanent": true
+    },
+    {
       "source": "/salary/:amount((?!2026$)\\d{4,6})",
       "destination": "/salary/2026/:amount",
       "permanent": true
