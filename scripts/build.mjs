@@ -16,7 +16,8 @@ const dist = path.join(root, "dist");
 const site = {
   name: "연봉 실수령액표",
   origin: "https://www.mysalary.kr",
-  adsenseClient: "ca-pub-0000000000000000"
+  adsenseClient: "ca-pub-9240461016907498",
+  contactEmail: "contact@mysalary.kr"
 };
 
 const rows = makeSalaryRows();
@@ -145,6 +146,7 @@ function pageLayout({
       <a href="/salary/2026">전체표</a>
       <a href="/calculator">계산기</a>
       <a href="/guide/2026">계산 기준</a>
+      <a href="/contact">문의</a>
     </nav>
   </header>
   <main>
@@ -169,6 +171,7 @@ function pageLayout({
   <footer>
     <p>본 사이트의 금액은 ${RULES_2026.assumptionLabel}의 예상치입니다. 회사 급여 규정, 비과세 항목, 부양가족, 원천징수 비율, 연말정산 결과에 따라 실제 금액은 달라질 수 있습니다.</p>
     <p>세무 판단이 필요한 경우 국세청, 국민연금공단, 국민건강보험공단, 고용보험 안내를 함께 확인하세요.</p>
+    <p class="footer-links"><a href="/privacy">개인정보처리방침</a><a href="/contact">문의</a><a href="/guide/2026">계산 기준과 출처</a></p>
   </footer>
   <script type="module" src="/assets/calculator.js"></script>
 </body>
@@ -257,21 +260,34 @@ function summaryCards(items) {
 function sourceSection() {
   return `<section class="content-band">
     <h2>계산 기준</h2>
-    <p>${RULES_2026.assumptionLabel}입니다. 국민연금은 2026년 7월 1일부터 2027년 6월 30일까지의 기준소득월액 하한 41만 원, 상한 659만 원을 적용했습니다.</p>
+    <p>${RULES_2026.assumptionLabel}, 12개월 균등 지급 전제입니다. 국민연금은 2026년 7월 1일부터 2027년 6월 30일까지의 기준소득월액 하한 41만 원, 상한 659만 원을 적용했습니다.</p>
     <ul class="plain-list">
+      <li>급여 조건: 근로소득자 본인 1명, 부양가족 없음, 월 비과세 0원, 상여·성과급 없이 12개월 균등 지급</li>
       <li>국민연금: 근로자 부담 4.75%, 기준소득월액 상한·하한 적용</li>
       <li>건강보험: 근로자 부담 3.595%</li>
       <li>장기요양보험: 건강보험료의 13.14%</li>
       <li>고용보험: 근로자 부담 0.9%</li>
-      <li>근로소득세: 근로소득공제, 기본공제, 4대보험 공제, 근로소득세액공제를 반영한 월 예상 원천징수액</li>
+      <li>근로소득세: 원천징수 100% 기준, 근로소득공제, 기본공제, 4대보험 공제, 근로소득세액공제를 반영한 월 예상 원천징수액</li>
     </ul>
     <p class="note">정확한 월 원천징수는 국세청 근로소득 간이세액표, 부양가족 수, 자녀 수, 비과세 급여, 원천징수 선택 비율에 따라 달라질 수 있습니다.</p>
     <div class="source-links" aria-label="공식 참고 링크">
       <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7862&mi=6583" rel="noopener noreferrer">국세청 근로소득 간이세액표</a>
+      <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7873&mi=6594" rel="noopener noreferrer">국세청 과세표준과 산출세액</a>
+      <a href="https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7875&mi=6596" rel="noopener noreferrer">국세청 근로소득세액공제</a>
       <a href="https://www.nps.or.kr/" rel="noopener noreferrer">국민연금공단</a>
-      <a href="https://www.mohw.go.kr/" rel="noopener noreferrer">보건복지부</a>
+      <a href="https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0038M0.do" rel="noopener noreferrer">국민연금 보험료 안내</a>
+      <a href="https://www.nhis.or.kr/nhis/minwon/initCtrbCalcView.do" rel="noopener noreferrer">국민건강보험 모의계산</a>
+      <a href="https://www.nhis.or.kr/static/html/wbda/c/wbdac05.html" rel="noopener noreferrer">장기요양보험 재원 안내</a>
       <a href="https://www.work24.go.kr/" rel="noopener noreferrer">고용24</a>
     </div>
+  </section>`;
+}
+
+function disclaimerSection() {
+  return `<section class="content-band">
+    <h2>면책 안내</h2>
+    <p>이 사이트의 실수령액은 공개 기준과 단순화한 계산식을 바탕으로 한 참고용 예상 금액입니다. 실제 급여는 회사 급여 규정, 비과세 항목, 부양가족 수, 자녀 수, 상여 지급 방식, 원천징수 비율, 사내 공제, 입사·퇴사일, 연말정산 결과에 따라 달라질 수 있습니다.</p>
+    <p>세금 신고, 급여 정산, 노무·세무 판단이 필요한 경우에는 회사 급여 담당자 또는 세무 전문가에게 확인하고, 국세청·국민연금공단·국민건강보험공단·고용보험의 최신 안내를 함께 참고하세요.</p>
   </section>`;
 }
 
@@ -465,6 +481,7 @@ function homePage() {
         .join("")}</div>
     </section>
     ${sourceSection()}
+    ${disclaimerSection()}
     ${faqSection([
       {
         q: "표의 실수령액은 회사 급여명세서와 완전히 같은가요?",
@@ -513,6 +530,7 @@ function salaryIndexPage() {
     </section>
     ${deductionMeaningSection()}
     ${sourceSection()}
+    ${disclaimerSection()}
     ${relatedLinks()}
   `;
 
@@ -574,6 +592,7 @@ function intervalPage(start) {
       }
     ])}
     ${relatedLinks(start)}
+    ${disclaimerSection()}
   `;
 
   return pageLayout({
@@ -664,6 +683,7 @@ function detailPage(manwon) {
       }
     ])}
     ${relatedLinks(Math.floor(manwon / 1000) * 1000)}
+    ${disclaimerSection()}
   `;
 
   return pageLayout({
@@ -714,6 +734,7 @@ function calculatorPage() {
       <div id="calculatorOutput" class="result-panel"></div>
     </section>
     ${sourceSection()}
+    ${disclaimerSection()}
     ${faqSection([
       {
         q: "원천징수 80%, 100%, 120%는 무엇인가요?",
@@ -745,6 +766,7 @@ function guidePage() {
       <p>실수령액은 회사 급여 정책과 개인 세무 정보의 영향을 받습니다. 같은 연봉이라도 식대 비과세, 차량보조금, 부양가족 수, 상여 지급 방식, 원천징수 비율, 사내 공제 항목에 따라 월 지급액이 달라집니다.</p>
       <p>이 사이트는 검색과 비교에 적합하도록 기준을 고정한 표준 추정치를 제공합니다. 국세청 간이세액표 원문 파일을 반영하면 근로소득세 산출부를 더 정밀하게 교체할 수 있도록 계산 로직을 분리했습니다.</p>
     </section>
+    ${disclaimerSection()}
     <section class="content-band">
       <h2>검색 노출과 광고 준비</h2>
       <p>정적 HTML, canonical URL, sitemap.xml, robots.txt, FAQ 구조화 데이터를 생성합니다. AdSense 승인을 받은 뒤 발급된 게시자 ID를 빌드 설정의 <code>adsenseClient</code>와 <code>ads.txt</code>에 넣으면 광고 영역을 활성화할 수 있습니다.</p>
@@ -768,6 +790,81 @@ function guidePage() {
   });
 }
 
+function privacyPage() {
+  const body = `
+    <section class="content-band">
+      <h2>수집하는 정보</h2>
+      <p>이 사이트는 회원가입 없이 사용할 수 있으며 이름, 주민등록번호, 계좌번호 같은 민감한 개인정보를 직접 요구하지 않습니다. 다만 안정적인 서비스 운영과 보안 점검을 위해 접속 일시, 접속 IP, 브라우저 정보, 기기 정보, 방문 페이지, 오류 로그 같은 접속 로그가 서버 또는 호스팅 사업자의 로그에 남을 수 있습니다.</p>
+      <p>사용자가 문의 메일을 보내는 경우 회신을 위해 이메일 주소와 문의 내용을 처리합니다. 문의 기록은 답변 및 분쟁 대응에 필요한 기간 동안 보관한 뒤 불필요해지면 삭제합니다.</p>
+    </section>
+    <section class="content-band">
+      <h2>쿠키와 광고</h2>
+      <p>사이트는 방문 통계, 보안, 광고 송출을 위해 쿠키 또는 유사한 저장 기술을 사용할 수 있습니다. 사용자는 브라우저 설정에서 쿠키 저장을 거부하거나 삭제할 수 있으나, 일부 기능이나 광고 표시가 제한될 수 있습니다.</p>
+      <p>Google AdSense 승인 후 광고가 게재될 수 있습니다. 이 경우 Google 및 광고 파트너가 쿠키를 사용해 사용자의 이전 방문 기록 또는 관심사에 기반한 광고를 표시할 수 있으며, 광고 개인 최적화 설정은 Google 광고 설정 페이지에서 관리할 수 있습니다.</p>
+      <div class="source-links" aria-label="광고 개인정보 안내">
+        <a href="https://policies.google.com/technologies/ads?hl=ko" rel="noopener noreferrer">Google 광고 쿠키 안내</a>
+        <a href="https://myadcenter.google.com/" rel="noopener noreferrer">Google 광고 설정</a>
+        <a href="https://support.google.com/adsense/answer/1348695?hl=ko" rel="noopener noreferrer">AdSense 개인정보 안내</a>
+      </div>
+    </section>
+    <section class="content-band">
+      <h2>이용 목적과 보관</h2>
+      <ul class="plain-list">
+        <li>서비스 제공: 연봉 실수령액표와 계산기 페이지 제공</li>
+        <li>운영 관리: 장애 확인, 보안 점검, 악성 요청 차단, 트래픽 분석</li>
+        <li>문의 응대: 사용자가 보낸 문의에 대한 답변 및 처리 이력 관리</li>
+        <li>광고 운영: Google AdSense 등 광고 게재 및 부정 클릭 방지</li>
+      </ul>
+      <p>법령상 보관 의무가 있거나 분쟁 대응에 필요한 경우를 제외하고, 수집 목적이 달성된 정보는 지체 없이 파기합니다.</p>
+    </section>
+    <section class="content-band">
+      <h2>제3자 제공과 위탁</h2>
+      <p>법령에 따른 요청이 있는 경우를 제외하고 사용자의 개인정보를 임의로 판매하거나 제공하지 않습니다. 다만 사이트 배포, 접속 로그 저장, 광고 송출 과정에서 호스팅 사업자, Google 등 외부 서비스가 각자의 정책에 따라 정보를 처리할 수 있습니다.</p>
+    </section>
+    <section class="content-band">
+      <h2>문의</h2>
+      <p>개인정보 관련 요청, 광고 관련 문의, 계산 오류 제보는 <a href="mailto:${site.contactEmail}">${site.contactEmail}</a>로 보내주세요.</p>
+      <p class="note">시행일: 2026년 7월 1일</p>
+    </section>
+  `;
+
+  return pageLayout({
+    route: "/privacy",
+    title: "개인정보처리방침｜연봉 실수령액표",
+    description:
+      "연봉 실수령액표의 개인정보처리방침입니다. 쿠키, 광고, 접속 로그, Google AdSense 사용 가능성, 문의 처리 방법을 안내합니다.",
+    h1: "개인정보처리방침",
+    intro: "쿠키, 광고, 접속 로그, 문의 메일 처리 기준을 투명하게 정리했습니다.",
+    body
+  });
+}
+
+function contactPage() {
+  const body = `
+    <section class="content-band">
+      <h2>운영자 연락 방법</h2>
+      <p>계산 오류 제보, 출처 업데이트 요청, 광고·개인정보 문의는 아래 이메일로 보내주세요.</p>
+      <p class="contact-card"><a href="mailto:${site.contactEmail}">${site.contactEmail}</a></p>
+      <p>문의할 때 확인한 페이지 주소, 입력한 연봉·비과세·원천징수 조건, 실제와 다르게 보인 항목을 함께 적어주시면 더 빠르게 확인할 수 있습니다.</p>
+    </section>
+    <section class="content-band">
+      <h2>응답 안내</h2>
+      <p>운영 상황에 따라 회신까지 시간이 걸릴 수 있습니다. 세무 상담, 급여명세서 검토, 회사별 급여 규정 해석은 제공하지 않으며, 필요한 경우 회사 급여 담당자나 세무 전문가에게 확인해 주세요.</p>
+    </section>
+    ${disclaimerSection()}
+  `;
+
+  return pageLayout({
+    route: "/contact",
+    title: "문의｜연봉 실수령액표",
+    description:
+      "연봉 실수령액표 운영자 연락 방법입니다. 계산 오류, 출처 업데이트, 광고와 개인정보 관련 문의를 이메일로 보낼 수 있습니다.",
+    h1: "문의",
+    intro: "계산 오류 제보와 운영 문의를 받을 수 있는 연락처입니다.",
+    body
+  });
+}
+
 function clientCalculatorJs() {
   return `const RULES = ${JSON.stringify(RULES_2026)};
 function roundDown10(value){return Math.floor(value/10)*10}
@@ -784,7 +881,7 @@ renderQuick();renderCalculator();`;
 }
 
 function stylesCss() {
-  return `:root{color-scheme:light;--ink:#17201b;--muted:#5d6862;--line:#d9dfda;--paper:#fbfcfa;--band:#eef3f0;--accent:#0f6b54;--accent-2:#315c9b;--danger:#a33a32;--warn:#8f4a12;--white:#fff}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}a{color:inherit}.site-header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:rgba(251,252,250,.95);backdrop-filter:blur(10px)}.brand{font-weight:800;text-decoration:none;font-size:18px}.site-header nav{display:flex;gap:8px;flex-wrap:wrap}.site-header nav a{padding:8px 10px;text-decoration:none;border-radius:6px;color:var(--muted)}.site-header nav a:hover{background:var(--band);color:var(--ink)}main{max-width:1440px;margin:0 auto;padding:0 clamp(12px,2vw,28px) 56px}.hero{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:end;padding:48px 0 30px;border-bottom:1px solid var(--line)}.eyebrow{margin:0 0 8px;color:var(--accent);font-weight:800}.hero h1{margin:0;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:0}.intro{max-width:760px;margin:16px 0 0;color:var(--muted);font-size:18px}.quick-calc{border:1px solid var(--line);background:var(--white);border-radius:8px;padding:18px}.quick-calc label,.form-grid label{display:grid;gap:8px;font-weight:700}.input-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}.quick-calc input,.form-grid input,.form-grid select{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;padding:0 12px;font:inherit;background:#fff}.quick-calc output{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-weight:800;color:var(--accent)}.ad-slot{display:grid;place-items:center;min-height:92px;margin:24px 0;border:1px dashed #b9c1bb;border-radius:8px;background:#f7f9f7;color:var(--muted);font-size:14px}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:28px 0}.metrics article{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px}.metrics span{display:block;color:var(--muted);font-size:14px}.metrics strong{display:block;margin-top:6px;font-size:24px;line-height:1.2;color:var(--accent)}.metrics p{margin:8px 0 0;color:var(--muted);font-size:14px}.content-band{padding:32px 0;border-top:1px solid var(--line)}.content-band h2{margin:0 0 12px;font-size:26px;letter-spacing:0}.content-band p{max-width:860px;color:var(--muted)}.note{padding:12px 14px;border-left:4px solid var(--warn);background:#fff8ef}.plain-list{padding-left:20px;color:var(--muted)}.plain-list li+li{margin-top:4px}.source-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.source-links a{padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--white);text-decoration:none;color:var(--accent-2);font-weight:700}.table-wrap{width:max-content;max-width:100%;overflow:visible;border:1px solid var(--line);border-radius:8px;background:var(--white)}table{width:800px;max-width:none;border-collapse:collapse;table-layout:auto}th,td{padding:9px 0;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap;font-family:"Arial Narrow","Roboto Condensed",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.22;letter-spacing:0;font-kerning:none;font-stretch:condensed;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:center;position:sticky;left:0;background:var(--white);z-index:1}thead th{position:sticky;top:0;background:#edf4ef;color:#24352c;font-weight:800;z-index:2}thead th:first-child{z-index:3}tbody tr:hover{background:#f6faf7}tbody tr:hover th:first-child{background:#f6faf7}.group-row td,.table-ad-row td{position:static!important;text-align:left;white-space:normal;z-index:auto}.group-row td{background:#dfeae4!important;color:#18382e;font-weight:900;font-size:12px;border-top:2px solid #b9ccc1;border-bottom:1px solid #b9ccc1}.table-ad-row td{background:#fbfcfa!important;padding:14px 12px}.table-ad-slot{display:grid;place-items:center;min-height:86px;border:1px dashed #b9c1bb;border-radius:8px;background:#f7f9f7;color:var(--muted);font-size:14px}.repeat-header th{background:#edf4ef;color:#24352c;font-weight:800}.repeat-header th:first-child{background:#edf4ef}.negative{color:var(--danger)}.increase{color:var(--accent-2);font-weight:800}.paycheck div{display:flex;justify-content:space-between;gap:14px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:#fff}.paycheck span{color:var(--muted)}.meaning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.meaning-grid article{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:16px}.meaning-grid p{margin:6px 0 0}.paycheck{max-width:620px;display:grid;gap:8px}.paycheck .total{border-color:#dcb9b5;background:#fff7f6}.paycheck .net{border-color:#aed3c7;background:#f2fbf7}.stacked-bar{display:flex;overflow:hidden;height:36px;border-radius:8px;border:1px solid var(--line);background:#fff}.segment{display:block;min-width:2px}.segment-net{background:#0f6b54}.segment-nationalPension{background:#315c9b}.segment-healthInsurance{background:#5a8f47}.segment-longTermCare{background:#9d7b2f}.segment-employmentInsurance{background:#477f8f}.segment-incomeTax{background:#a33a32}.segment-localIncomeTax{background:#7b4a87}.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px}.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}.bar-list,.increase-chart{display:grid;gap:10px;max-width:820px}.bar-row{display:grid;grid-template-columns:120px minmax(120px,1fr) 180px;gap:12px;align-items:center}.bar-row span{font-weight:700}.bar-row strong{text-align:right;color:var(--muted)}.bar-track{height:12px;border-radius:999px;background:#e7ece8;overflow:hidden}.bar-track i{display:block;height:100%;border-radius:999px;background:var(--accent-2)}.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:16px}.link-grid a{display:flex;align-items:center;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--white);text-decoration:none;font-weight:700;color:var(--accent-2)}.link-grid a:hover{border-color:var(--accent-2);background:#f3f7fd}.faq{display:grid;gap:10px}.faq details{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:14px}.faq summary{cursor:pointer;font-weight:800}.faq p{margin:10px 0 0}.breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.breakdown div{display:flex;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:8px;background:var(--white);padding:14px}.breakdown dt{font-weight:800}.breakdown dd{margin:0;color:var(--accent)}.breakdown dd.negative{color:var(--danger)}.calculator-panel{background:var(--band);margin-top:28px;padding:24px;border-radius:8px;border:1px solid var(--line)}.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.result-panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}.result-panel>div{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:16px}.result-panel span{display:block;color:var(--muted);font-size:14px}.result-panel strong{display:block;margin-top:4px;font-size:24px;color:var(--accent)}.result-panel strong.negative{color:var(--danger)}.result-panel table{grid-column:1/-1;min-width:0;background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}code{padding:2px 5px;border-radius:4px;background:#e7ece8}footer{border-top:1px solid var(--line);padding:24px clamp(16px,4vw,48px);color:var(--muted);font-size:14px;max-width:1240px;margin:0 auto}@media (max-width:1080px){th,td{padding:8px 0;font-size:14px}}@media (max-width:860px){.site-header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding-top:30px}.metrics{grid-template-columns:1fr 1fr}.form-grid,.result-panel{grid-template-columns:1fr}.hero h1{font-size:36px}.bar-row{grid-template-columns:1fr;gap:5px}.bar-row strong{text-align:left}}@media (max-width:760px){main{padding-left:10px;padding-right:10px}.table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--white)}.table-wrap table{width:800px;min-width:800px}.table-ad-row td{padding:12px 8px}.table-ad-slot{min-height:74px}.content-band h2{font-size:22px}}@media (max-width:520px){.metrics{grid-template-columns:1fr}.site-header nav a{padding-left:0}.quick-calc{padding:14px}.stacked-bar{height:30px}}`;
+  return `:root{color-scheme:light;--ink:#17201b;--muted:#5d6862;--line:#d9dfda;--paper:#fbfcfa;--band:#eef3f0;--accent:#0f6b54;--accent-2:#315c9b;--danger:#a33a32;--warn:#8f4a12;--white:#fff}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}a{color:inherit}.site-header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:rgba(251,252,250,.95);backdrop-filter:blur(10px)}.brand{font-weight:800;text-decoration:none;font-size:18px}.site-header nav{display:flex;gap:8px;flex-wrap:wrap}.site-header nav a{padding:8px 10px;text-decoration:none;border-radius:6px;color:var(--muted)}.site-header nav a:hover{background:var(--band);color:var(--ink)}main{max-width:1440px;margin:0 auto;padding:0 clamp(12px,2vw,28px) 56px}.hero{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:end;padding:48px 0 30px;border-bottom:1px solid var(--line)}.eyebrow{margin:0 0 8px;color:var(--accent);font-weight:800}.hero h1{margin:0;font-size:clamp(34px,5vw,64px);line-height:1.08;letter-spacing:0}.intro{max-width:760px;margin:16px 0 0;color:var(--muted);font-size:18px}.quick-calc{border:1px solid var(--line);background:var(--white);border-radius:8px;padding:18px}.quick-calc label,.form-grid label{display:grid;gap:8px;font-weight:700}.input-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}.quick-calc input,.form-grid input,.form-grid select{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;padding:0 12px;font:inherit;background:#fff}.quick-calc output{display:block;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-weight:800;color:var(--accent)}.ad-slot{display:grid;place-items:center;min-height:92px;margin:24px 0;border:1px dashed #b9c1bb;border-radius:8px;background:#f7f9f7;color:var(--muted);font-size:14px}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:28px 0}.metrics article{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px}.metrics span{display:block;color:var(--muted);font-size:14px}.metrics strong{display:block;margin-top:6px;font-size:24px;line-height:1.2;color:var(--accent)}.metrics p{margin:8px 0 0;color:var(--muted);font-size:14px}.content-band{padding:32px 0;border-top:1px solid var(--line)}.content-band h2{margin:0 0 12px;font-size:26px;letter-spacing:0}.content-band p{max-width:860px;color:var(--muted)}.note{padding:12px 14px;border-left:4px solid var(--warn);background:#fff8ef}.plain-list{padding-left:20px;color:var(--muted)}.plain-list li+li{margin-top:4px}.source-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.source-links a{padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--white);text-decoration:none;color:var(--accent-2);font-weight:700}.contact-card{display:inline-flex;align-items:center;min-height:54px;padding:12px 16px;border:1px solid var(--line);border-radius:8px;background:var(--white);font-weight:900;color:var(--accent-2)}.table-wrap{width:max-content;max-width:100%;overflow:visible;border:1px solid var(--line);border-radius:8px;background:var(--white)}table{width:800px;max-width:none;border-collapse:collapse;table-layout:auto}th,td{padding:9px 0;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap;font-family:"Arial Narrow","Roboto Condensed",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.22;letter-spacing:0;font-kerning:none;font-stretch:condensed;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:center;position:sticky;left:0;background:var(--white);z-index:1}thead th{position:sticky;top:0;background:#edf4ef;color:#24352c;font-weight:800;z-index:2}thead th:first-child{z-index:3}tbody tr:hover{background:#f6faf7}tbody tr:hover th:first-child{background:#f6faf7}.group-row td,.table-ad-row td{position:static!important;text-align:left;white-space:normal;z-index:auto}.group-row td{background:#dfeae4!important;color:#18382e;font-weight:900;font-size:12px;border-top:2px solid #b9ccc1;border-bottom:1px solid #b9ccc1}.table-ad-row td{background:#fbfcfa!important;padding:14px 12px}.table-ad-slot{display:grid;place-items:center;min-height:86px;border:1px dashed #b9c1bb;border-radius:8px;background:#f7f9f7;color:var(--muted);font-size:14px}.repeat-header th{background:#edf4ef;color:#24352c;font-weight:800}.repeat-header th:first-child{background:#edf4ef}.negative{color:var(--danger)}.increase{color:var(--accent-2);font-weight:800}.paycheck div{display:flex;justify-content:space-between;gap:14px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:#fff}.paycheck span{color:var(--muted)}.meaning-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.meaning-grid article{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:16px}.meaning-grid p{margin:6px 0 0}.paycheck{max-width:620px;display:grid;gap:8px}.paycheck .total{border-color:#dcb9b5;background:#fff7f6}.paycheck .net{border-color:#aed3c7;background:#f2fbf7}.stacked-bar{display:flex;overflow:hidden;height:36px;border-radius:8px;border:1px solid var(--line);background:#fff}.segment{display:block;min-width:2px}.segment-net{background:#0f6b54}.segment-nationalPension{background:#315c9b}.segment-healthInsurance{background:#5a8f47}.segment-longTermCare{background:#9d7b2f}.segment-employmentInsurance{background:#477f8f}.segment-incomeTax{background:#a33a32}.segment-localIncomeTax{background:#7b4a87}.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.legend span{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px}.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}.bar-list,.increase-chart{display:grid;gap:10px;max-width:820px}.bar-row{display:grid;grid-template-columns:120px minmax(120px,1fr) 180px;gap:12px;align-items:center}.bar-row span{font-weight:700}.bar-row strong{text-align:right;color:var(--muted)}.bar-track{height:12px;border-radius:999px;background:#e7ece8;overflow:hidden}.bar-track i{display:block;height:100%;border-radius:999px;background:var(--accent-2)}.link-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:16px}.link-grid a{display:flex;align-items:center;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--white);text-decoration:none;font-weight:700;color:var(--accent-2)}.link-grid a:hover{border-color:var(--accent-2);background:#f3f7fd}.faq{display:grid;gap:10px}.faq details{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:14px}.faq summary{cursor:pointer;font-weight:800}.faq p{margin:10px 0 0}.breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.breakdown div{display:flex;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:8px;background:var(--white);padding:14px}.breakdown dt{font-weight:800}.breakdown dd{margin:0;color:var(--accent)}.breakdown dd.negative{color:var(--danger)}.calculator-panel{background:var(--band);margin-top:28px;padding:24px;border-radius:8px;border:1px solid var(--line)}.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.result-panel{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}.result-panel>div{border:1px solid var(--line);border-radius:8px;background:var(--white);padding:16px}.result-panel span{display:block;color:var(--muted);font-size:14px}.result-panel strong{display:block;margin-top:4px;font-size:24px;color:var(--accent)}.result-panel strong.negative{color:var(--danger)}.result-panel table{grid-column:1/-1;min-width:0;background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}code{padding:2px 5px;border-radius:4px;background:#e7ece8}footer{border-top:1px solid var(--line);padding:24px clamp(16px,4vw,48px);color:var(--muted);font-size:14px;max-width:1240px;margin:0 auto}.footer-links{display:flex;gap:12px;flex-wrap:wrap}.footer-links a{font-weight:800;color:var(--accent-2);text-decoration:none}@media (max-width:1080px){th,td{padding:8px 0;font-size:14px}}@media (max-width:860px){.site-header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding-top:30px}.metrics{grid-template-columns:1fr 1fr}.form-grid,.result-panel{grid-template-columns:1fr}.hero h1{font-size:36px}.bar-row{grid-template-columns:1fr;gap:5px}.bar-row strong{text-align:left}}@media (max-width:760px){main{padding-left:10px;padding-right:10px}.table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--white)}.table-wrap table{width:800px;min-width:800px}.table-ad-row td{padding:12px 8px}.table-ad-slot{min-height:74px}.content-band h2{font-size:22px}}@media (max-width:520px){.metrics{grid-template-columns:1fr}.site-header nav a{padding-left:0}.quick-calc{padding:14px}.stacked-bar{height:30px}}`;
 }
 
 async function main() {
@@ -797,6 +894,8 @@ async function main() {
   await writePage("/salary/2026", salaryIndexPage());
   await writePage("/calculator", calculatorPage());
   await writePage("/guide/2026", guidePage());
+  await writePage("/privacy", privacyPage());
+  await writePage("/contact", contactPage());
 
   for (const start of intervalStarts) {
     await writePage(`/salary/2026/${start}-${start + 1000}`, intervalPage(start));
@@ -810,6 +909,8 @@ async function main() {
     "/salary/2026",
     "/calculator",
     "/guide/2026",
+    "/privacy",
+    "/contact",
     ...intervalStarts.map((start) => `/salary/2026/${start}-${start + 1000}`),
     ...popularSalaries.map((salary) => `/salary/2026/${salary}`)
   ];
@@ -836,7 +937,7 @@ Sitemap: ${site.origin}/sitemap.xml
   );
   await writeFile(
     path.join(dist, "ads.txt"),
-    "# Replace this file after AdSense approval, for example:\n# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0\n"
+    "google.com, pub-9240461016907498, DIRECT, f08c47fec0942fa0\n"
   );
 
   console.log(`Built ${routes.length} pages in ${path.relative(root, dist)}`);

@@ -10,6 +10,8 @@
 - `/salary/2026/3000` 등: 많이 찾는 연봉 상세 페이지
 - `/calculator`: 세전 세후 계산기
 - `/guide/2026`: 계산 기준, 검색 등록, AdSense 안내
+- `/privacy`: 개인정보처리방침, 쿠키, 광고, 접속 로그, Google AdSense 사용 가능성 안내
+- `/contact`: 운영자 문의 이메일 안내
 - `/sitemap.xml`, `/robots.txt`, `/ads.txt`
 
 ## 화면 구조
@@ -28,8 +30,13 @@
 - 일반 직장인 근로소득
 - 연봉을 12개월 균등 지급
 - 본인 1명, 비과세 0원 기본값
+- 원천징수 100% 기본값
 - 산재보험은 근로자 실수령액 차감에서 제외
 - 국민연금, 건강보험, 장기요양보험, 고용보험, 근로소득세, 지방소득세 표시
+
+공식 출처는 사이트의 `/guide/2026`과 각 주요 페이지의 계산 기준 섹션에 정리합니다. 국세청, 국민연금공단, 국민건강보험공단, 고용보험 안내를 기준으로 링크를 제공합니다.
+
+실제 급여는 회사 규정, 비과세 항목, 부양가족 수, 원천징수 비율, 사내 공제, 연말정산 결과에 따라 달라질 수 있으므로 사이트 곳곳에 면책 안내를 표시합니다.
 
 근로소득세는 근로소득공제, 기본공제, 4대보험 공제, 근로소득세액공제를 반영한 예상 월 원천징수액입니다. 실제 급여명세서와 맞추려면 국세청 근로소득 간이세액표 Excel을 CSV/JSON으로 변환해 `src/calc.mjs`의 소득세 산출부를 교체하세요.
 
@@ -50,16 +57,18 @@ npm run serve
 ## 배포 전 수정할 곳
 
 `scripts/build.mjs`의 `site.origin`을 실제 도메인으로 바꾸세요.
+문의 이메일도 실제 운영자 이메일로 바꾸세요.
 
 ```js
 const site = {
   name: "연봉 실수령액표",
-  origin: "https://example.com",
-  adsenseClient: "ca-pub-0000000000000000"
+  origin: "https://www.mysalary.kr",
+  adsenseClient: "ca-pub-9240461016907498",
+  contactEmail: "contact@mysalary.kr"
 };
 ```
 
-AdSense 승인 후에는 `adsenseClient`와 `dist/ads.txt`에 발급받은 게시자 ID를 반영하세요.
+AdSense 게시자 ID는 `adsenseClient`와 `ads.txt` 생성부에 함께 반영합니다.
 
 ## Google 검색 등록
 
